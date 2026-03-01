@@ -21,6 +21,7 @@ import {
   KeyRound,
   Shield,
   Cpu,
+  Rocket,
 } from "lucide-react";
 import type { Provider, VisibleApps } from "@/types";
 import type { EnvConflict } from "@/types/env";
@@ -58,6 +59,7 @@ import { SkillsPage } from "@/components/skills/SkillsPage";
 import UnifiedSkillsPanel from "@/components/skills/UnifiedSkillsPanel";
 import { DeepLinkImportDialog } from "@/components/DeepLinkImportDialog";
 import { AgentsPanel } from "@/components/agents/AgentsPanel";
+import { ClaudeCodeStarter } from "@/components/ClaudeCodeStarter";
 import { UniversalProviderPanel } from "@/components/universal";
 import { McpIcon } from "@/components/BrandIcons";
 import { Button } from "@/components/ui/button";
@@ -84,7 +86,8 @@ type View =
   | "workspace"
   | "openclawEnv"
   | "openclawTools"
-  | "openclawAgents";
+  | "openclawAgents"
+  | "claudeCodeStarter";
 
 interface WebDavSyncStatusUpdatedPayload {
   source?: string;
@@ -722,6 +725,10 @@ function App() {
           return (
             <AgentsPanel onOpenChange={() => setCurrentView("providers")} />
           );
+        case "claudeCodeStarter":
+          return (
+            <ClaudeCodeStarter />
+          );
         case "universal":
           return (
             <div className="px-6 pt-4">
@@ -1142,6 +1149,15 @@ function App() {
                                 title={t("openclaw.agents.title")}
                               >
                                 <Cpu className="w-4 h-4" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => setCurrentView("claudeCodeStarter")}
+                                className="text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5"
+                                title="Claude Code 小白入门"
+                              >
+                                <Rocket className="w-4 h-4" />
                               </Button>
                               <Button
                                 variant="ghost"
