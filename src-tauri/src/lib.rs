@@ -1033,6 +1033,11 @@ pub fn run() {
             commands::delete_daily_memory_file,
             commands::search_daily_memory_files,
             commands::open_workspace_directory,
+            // Claude Code Starter
+            commands::check_claude_code_status,
+            commands::install_claude_code,
+            commands::open_folder_with_claude_code,
+            commands::select_folder_dialog,
         ]);
 
     let app = builder

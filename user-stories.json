@@ -1,0 +1,142 @@
+[
+  {
+    "id": "US-001",
+    "title": "Add Rust backend command to detect Claude Code installation",
+    "description": "Add a Tauri command that checks if Claude Code is installed on the system. Detection should work on macOS, Windows, and Linux by checking common installation paths and the PATH.\n\nImplementation notes:\n- Check common install paths on each platform\n- Return installation status: not_installed, installing, installed\n- Return installed version if detected",
+    "acceptanceCriteria": [
+      "Add detect_claude_code_installed command in src-tauri/src/commands/claude_code.rs",
+      "Command returns proper JSON structure with status and version",
+      "Tests for Claude Code detection command pass",
+      "Typecheck passes"
+    ]
+  },
+  {
+    "id": "US-002",
+    "title": "Add Rust backend command to install Claude Code",
+    "description": "Add a Tauri command that downloads and installs Claude Code on the system. The installation should be automated and show progress.\n\nImplementation notes:\n- Download Claude Code installer from official source\n- Run installer with appropriate flags for automated installation\n- Support macOS (pkg/dmg), Windows (msi/exe), Linux (AppImage/deb)\n- Return installation progress and result",
+    "acceptanceCriteria": [
+      "Add install_claude_code command in src-tauri/src/commands/claude_code.rs",
+      "Command downloads from official Anthropic source",
+      "Command runs installer silently",
+      "Tests for Claude Code installation command pass",
+      "Typecheck passes"
+    ]
+  },
+  {
+    "id": "US-003",
+    "title": "Add Rust backend command to open folder in file explorer",
+    "description": "Add a Tauri command that opens a specified folder in the system's file explorer (Finder on macOS, Explorer on Windows, file manager on Linux).\n\nImplementation notes:\n- Use platform-specific commands: open/xdg-open/explorer",
+    "acceptanceCriteria": [
+      "Add open_folder_in_explorer command in src-tauri/src/commands/claude_code.rs",
+      "Works on macOS (Finder), Windows (Explorer), Linux (file manager)",
+      "Tests for open folder command pass",
+      "Typecheck passes"
+    ]
+  },
+  {
+    "id": "US-004",
+    "title": "Add Rust backend command to launch Claude Code with folder",
+    "description": "Add a Tauri command that launches Claude Code application with a specified working directory.\n\nImplementation notes:\n- Use platform-specific app launching\n- Pass the working directory as argument to Claude Code",
+    "acceptanceCriteria": [
+      "Add launch_claude_code_with_folder command in src-tauri/src/commands/claude_code.rs",
+      "Launches Claude Code with specified folder as working directory",
+      "Tests for launch command pass",
+      "Typecheck passes"
+    ]
+  },
+  {
+    "id": "US-005",
+    "title": "Add frontend TypeScript API bindings for Claude Code commands",
+    "description": "Add TypeScript bindings in the frontend to call the new Rust backend commands.\n\nImplementation notes:\n- Create src/lib/api/claudeCode.ts with invoke wrappers\n- Add proper TypeScript types for the responses",
+    "acceptanceCriteria": [
+      "Add claudeCodeApi with methods: checkInstallation, install, openFolder, launch",
+      "Proper TypeScript types for all API methods",
+      "Tests for API bindings pass",
+      "Typecheck passes"
+    ]
+  },
+  {
+    "id": "US-006",
+    "title": "Create Claude Code Starter page component structure",
+    "description": "Create the main page component for the Claude Code Starter feature.\n\nImplementation notes:\n- Create src/components/claude-code-starter/ClaudeCodeStarterPage.tsx\n- Use existing UI components from src/components/ui/\n- Follow the pattern of other pages like SkillsPage",
+    "acceptanceCriteria": [
+      "Create ClaudeCodeStarterPage component",
+      "Component has proper TypeScript types",
+      "Uses existing UI components (Button, Card, etc.)",
+      "Tests for page component pass",
+      "Typecheck passes"
+    ]
+  },
+  {
+    "id": "US-007",
+    "title": "Add installation status display UI",
+    "description": "Add UI components to display the current Claude Code installation status.\n\nImplementation notes:\n- Show install status: not_installed, installing, installed\n- Show version when installed\n- Add visual indicators (icons, colors)",
+    "acceptanceCriteria": [
+      "Add InstallationStatus component",
+      "Shows three states: not installed, installing, installed",
+      "Displays version when installed",
+      "Tests for status display pass",
+      "Typecheck passes"
+    ]
+  },
+  {
+    "id": "US-008",
+    "title": "Add one-click install button UI",
+    "description": "Add a prominent button for one-click Claude Code installation.\n\nImplementation notes:\n- Large, friendly button targeting novice users\n- Shows loading state during installation\n- Shows success state after installation",
+    "acceptanceCriteria": [
+      "Add InstallButton component",
+      "Button text: Install Claude Code / Installing... / Installed",
+      "Disabled state while installing",
+      "Tests for install button pass",
+      "Typecheck passes"
+    ]
+  },
+  {
+    "id": "US-009",
+    "title": "Add folder selector for working directory",
+    "description": "Add UI for users to select a working folder where Claude Code will be launched.\n\nImplementation notes:\n- Use Tauri dialog plugin for folder selection\n- Display selected folder path\n- Allow changing the folder",
+    "acceptanceCriteria": [
+      "Add FolderSelector component",
+      "Uses @tauri-apps/plugin-dialog for folder picker",
+      "Shows selected folder path",
+      "Tests for folder selector pass",
+      "Typecheck passes"
+    ]
+  },
+  {
+    "id": "US-010",
+    "title": "Add launch button to open folder and start Claude Code",
+    "description": "Add the main action button that opens the selected folder in file explorer and launches Claude Code.\n\nImplementation notes:\n- Button text: Open Folder and Start Claude Code\n- First opens folder in explorer, then launches Claude Code\n- Show loading state during launch",
+    "acceptanceCriteria": [
+      "Add LaunchButton component",
+      "Opens folder in explorer first, then launches Claude Code",
+      "Handles errors gracefully with toast notifications",
+      "Tests for launch button pass",
+      "Typecheck passes"
+    ]
+  },
+  {
+    "id": "US-011",
+    "title": "Integrate Claude Code Starter page into App navigation",
+    "description": "Add the new page to the main App.tsx routing and navigation.\n\nImplementation notes:\n- Add claudeCodeStarter to View type\n- Add component import and conditional rendering\n- Add navigation menu item or button to access the page",
+    "acceptanceCriteria": [
+      "Add claudeCodeStarter to View type in App.tsx",
+      "Add navigation entry (sidebar button or header menu)",
+      "Component renders correctly when navigated to",
+      "Tests for navigation integration pass",
+      "Typecheck passes"
+    ]
+  },
+  {
+    "id": "US-012",
+    "title": "Add i18n translations for the new page",
+    "description": "Add internationalization support for the Claude Code Starter page.\n\nImplementation notes:\n- Add translation keys for all UI text\n- Support English and Chinese (existing languages)",
+    "acceptanceCriteria": [
+      "Add translation keys in English locale",
+      "Add translation keys in Chinese locale",
+      "All UI text uses t() translation function",
+      "Tests for translations pass",
+      "Typecheck passes"
+    ]
+  }
+]
